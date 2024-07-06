@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket Test</title>
+  </head>
+  <body>
+    <h1>WebSocket Test</h1>
+    <div id="messages"></div>
+    <form id="commentForm">
+      <!-- Ваши поля формы -->
+      <img
+        id="captchaImage"
+        src="http://localhost:8000/captcha"
+        alt="CAPTCHA"
+      />
+      <input type="text" name="captcha" placeholder="Enter CAPTCHA" required />
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      document
+        .getElementById('captchaImage')
+        .addEventListener('click', function () {
+          this.src = 'http://localhost:8000/captcha?' + Date.now(); // Обновление CAPTCHA по клику
+        });
+    </script>
+    <script>
+      const ws = new WebSocket('ws://localhost:8000');
+
+      ws.onopen = () => {
+        console.log('Connected to WebSocket server');
+      };
+
+      ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        if (message.type === 'NEW_COMMENT') {
+          const messagesDiv = document.getElementById('messages');
+          const comment = message.data;
+          const commentElement = document.createElement('div');
+          commentElement.textContent = `User ${comment.userId} commented: ${comment.text}`;
+          messagesDiv.appendChild(commentElement);
+        }
+      };
+
+      ws.onclose = () => {
+        console.log('Disconnected from WebSocket server');
+      };
+
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
+    </script>
+  </body>
+</html>
