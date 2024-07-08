@@ -1,3 +1,5 @@
+# comments-app
+
 # Comment System with Authentication and File Upload
 
 ## Overview
@@ -29,28 +31,26 @@ This application is a comment system built with Express.js, WebSocket, PostgreSQ
    https://github.com/jeka-leb/comments-app.git
 
    RUN:
-   npm run start:dev - for development
-   npm run start:prod - for production
-   npm run debug - for debugging
+   #### npm run start:dev - for development
+   #### npm run start:prod - for production
+   #### npm run debug - for debugging
 
-### Installation
-
-API Endpoints
+### API Endpoints
 
 Authentication
 
-POST /auth/register: Register a new user.
-POST /auth/login: Log in an existing user and receive a JWT token.
+```POST /auth/register``` : Register a new user.  
+ ```POST /auth/login``` : Log in an existing user and receive a JWT token.  
 
 Comments
 
-GET /comments: Get comments.
-GET /comments?page=1&pageSize=25&sortField=createdAt&sortOrder=desc: Get comments with pagination and sorting.
-POST /comments: Post a new comment (requires authentication and CAPTCHA).
+```GET /comments``` : Get comments.  
+```GET /comments?page=1&pageSize=25&sortField=createdAt&sortOrder=desc``` : Get comments with pagination and sorting.  
+```POST /comments``` : Post a new comment (requires authentication and CAPTCHA).  
 
 CAPTCHA
 
-GET /captcha: Get a new CAPTCHA.
+```GET /captcha``` : Get a new CAPTCHA.
 
 # Testing
 
@@ -60,17 +60,17 @@ To test WebSocket functionality, you can WebSocket clients in browsers.
 
 Connect to WebSocket:
 
-websocat ws://localhost:3000
+websocat ```ws://localhost:3000```
 
 ## CAPTCHA Testing with Postman
 
 ### Generate CAPTCHA:
 
-GET /captcha
+```GET /captcha```
 
 ### Submit Comment with CAPTCHA:
 
-POST /comments
+```POST /comments```
 
 Include the CAPTCHA text from the previous step in the request body.
 Project Structure
@@ -80,14 +80,14 @@ Project Structure
 1. Register user via /auth/register
 2. Log in user to get valid JWT via /auth/login
 3. Get captcha via /captcha
-4. Post new comment using JWT in the format: Berear <JWT>
+4. Post new comment using JWT in the format: Berear "JSON Web Token"
 
 ### Pull Docker image
 
-docker pull jekaleb/comments
+```docker pull jekaleb/comments```
 
 ### Project Structure
-
+```
 .
 ├── controllers
 │ ├── authController.js
