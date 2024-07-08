@@ -11,10 +11,10 @@ class CommentController {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { text, parentId } = req.body;
+    const { text, parentId, homePage } = req.body;
     const userId = req.user.id;
     let fileUrl = null;
-
+    console.log(homePage);
     if (req.file) {
       if (req.file.mimetype.startsWith('image/')) {
         fileUrl = await resizeImage(req.file.path);
@@ -29,6 +29,7 @@ class CommentController {
       text,
       parentId,
       fileUrl,
+      homePage,
     });
     res.status(201).json(comment);
 
