@@ -24,7 +24,7 @@ class AuthController {
 
     res.status(201).json({
       status: 'success',
-      user: newUser,
+      data: { user: newUser },
     });
   });
 
@@ -47,7 +47,7 @@ class AuthController {
 
     res.status(201).json({
       status: 'success',
-      token,
+      data: { token },
     });
   });
 }

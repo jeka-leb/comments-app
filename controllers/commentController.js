@@ -31,7 +31,10 @@ class CommentController {
       fileUrl,
       homePage,
     });
-    res.status(201).json(comment);
+    res.status(201).json({
+      status: 'success',
+      data: { comment },
+    });
 
     const wss = req.app.get('wss');
     if (wss && wss.clients) {
@@ -60,7 +63,7 @@ class CommentController {
       sortField,
       sortOrder,
     });
-    res.json({ comments, totalPages });
+    res.json({ status: 'success', data: { comments }, totalPages });
   });
 }
 

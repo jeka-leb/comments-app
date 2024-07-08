@@ -42,6 +42,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      message: 'This is comments servise application',
+    },
+  });
+});
 app.use('/comments', commentRouter);
 app.use('/auth', authRouter);
 app.use('/captcha', captchaRouter);
